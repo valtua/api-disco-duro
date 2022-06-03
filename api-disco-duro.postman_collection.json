@@ -1,0 +1,100 @@
+{
+    "info": {
+        "_postman_id": "5da845d1-dbce-4191-b3a5-e5e0875af39e",
+        "name": "api-disco-duro",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "new user",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"test\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123456\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{server}}/users/register",
+                    "host": ["{{server}}"],
+                    "path": ["users", "register"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "login user",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123456\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{server}}/users/login",
+                    "host": ["{{server}}"],
+                    "path": ["users", "login"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "get user space",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "{{user}}",
+                        "type": "default"
+                    }
+                ],
+                "url": {
+                    "raw": "{{server}}/users/1/space",
+                    "host": ["{{server}}"],
+                    "path": ["users", "1", "space"]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "server",
+            "value": "",
+            "type": "default"
+        },
+        {
+            "key": "user",
+            "value": "",
+            "type": "default"
+        }
+    ]
+}
