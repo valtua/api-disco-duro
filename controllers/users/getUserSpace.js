@@ -1,4 +1,4 @@
-const selectUserFilesQuery = require('../../db/filesQueries/selectUserFIlesQuery');
+const selectUserDirectoriesQuery = require('../../db/directoriesQueries/selectUserDirectoriesQuery');
 const { generateError } = require('../../helpers');
 
 const getUserSpace = async (req, res, next) => {
@@ -12,7 +12,7 @@ const getUserSpace = async (req, res, next) => {
             );
         }
 
-        const files = await selectUserFilesQuery(userId);
+        const files = await selectUserDirectoriesQuery(userId);
 
         res.send({
             status: 'ok',

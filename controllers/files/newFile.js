@@ -5,6 +5,7 @@ const {
 } = require('../../helpers');
 const fs = require('fs/promises');
 const path = require('path');
+const insertUserFilesQuery = require('../../db/filesQueries/insertUserFilesQuery');
 
 const newFile = async (req, res, next) => {
     try {
@@ -32,6 +33,8 @@ const newFile = async (req, res, next) => {
         await createPathIfNotExists(uploadsDir);
 
         file.mv(`${uploadsDir}/${file.name}`);
+
+        await insertUserFilesQuery(req.idUser, file.name)
 
         res.send({
             status: 'ok',

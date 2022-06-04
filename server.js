@@ -4,7 +4,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const newFile = require('./controllers/files/newFile');
-const getUserSpace = require('./controllers/users/getUserFiles');
+const getUserSpace = require('./controllers/users/getUserSpace');
 const loginUser = require('./controllers/users/loginUser');
 const newUser = require('./controllers/users/newUser');
 const authUser = require('./middleware/authUser');
@@ -22,7 +22,7 @@ app.post('/users/login', loginUser);
 
 app.get('/users/:userId/space', authUser, getUserSpace);
 
-app.post('/users/:userId/upload', authUser, newFile);
+app.post('/users/upload', authUser, newFile);
 
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);

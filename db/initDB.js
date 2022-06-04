@@ -45,7 +45,7 @@ async function main() {
                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
-                idDir INTEGER NOT NULL,
+                idDir INTEGER,
                 FOREIGN KEY (idDir) REFERENCES directories(id),
                 name VARCHAR(50) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
