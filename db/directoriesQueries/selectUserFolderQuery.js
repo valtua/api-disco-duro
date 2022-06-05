@@ -6,12 +6,12 @@ const selectUserFolderQuery = async (idUser, name) => {
     try {
         connection = await getConnection();
 
-        const folder = await connection.query(
+        const [folder] = await connection.query(
             `SELECT id, name FROM directories WHERE idUser = ? AND name = ?`,
             [idUser , name]
         );
         
-        return folder[0];
+        return folder;
     } finally {
         if (connection) connection.release();
     }

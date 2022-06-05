@@ -3,7 +3,6 @@ const {
     createPathIfNotExists,
     createUploadsIfNotExists,
 } = require('../../helpers');
-const fs = require('fs/promises');
 const path = require('path');
 const insertUserDirectoriesQuery = require('../../db/directoriesQueries/insertUserDirectoriesQuery');
 

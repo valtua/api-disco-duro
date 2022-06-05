@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
+const deleteDirectory = require('./controllers/directories/deleteDirectory');
 const newDirectory = require('./controllers/directories/newDirectory');
 const newFile = require('./controllers/files/newFile');
 const newFileInDirectory = require('./controllers/files/newFileInDirectory');
@@ -27,6 +28,8 @@ app.get('/users/:userId/space', authUser, getUserSpace);
 app.post('/users/upload', authUser, newFile);
 app.post('/users/folder', authUser, newDirectory)
 app.post('/users/upload/:folderName', authUser, newFileInDirectory)
+
+app.post('/users/delete/:folderName', authUser, deleteDirectory)
 
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
