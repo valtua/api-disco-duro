@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const deleteDirectory = require('./controllers/directories/deleteDirectory');
 const newDirectory = require('./controllers/directories/newDirectory');
+const downloadFile = require('./controllers/files/downloadFile');
 const newFile = require('./controllers/files/newFile');
 const newFileInDirectory = require('./controllers/files/newFileInDirectory');
 const getUserSpace = require('./controllers/users/getUserSpace');
@@ -23,11 +24,12 @@ app.use(fileUpload());
 app.post('/users/register', newUser);
 app.post('/users/login', loginUser);
 
-app.get('/users/:userId/space', authUser, getUserSpace);
+app.get('/users/space', authUser, getUserSpace);
 
 app.post('/users/upload', authUser, newFile);
-app.post('/users/folder', authUser, newDirectory)
-app.post('/users/upload/:folderName', authUser, newFileInDirectory)
+app.post('/users/folder', authUser, newDirectory);
+app.post('/users/upload/:folderName', authUser, newFileInDirectory);
+app.get('/users/download/:fileId', authUser, downloadFile);
 
 app.post('/users/delete/:folderName', authUser, deleteDirectory)
 
