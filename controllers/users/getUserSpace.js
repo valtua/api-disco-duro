@@ -1,23 +1,26 @@
 const selectUserDirectoriesQuery = require('../../db/directoriesQueries/selectUserDirectoriesQuery');
+const selectUserFilesQuery = require('../../db/filesQueries/selectUserFilesQuery');
 const { generateError } = require('../../helpers');
 
 const getUserSpace = async (req, res, next) => {
     try {
-        const { userId } = req.params;
-
-        if (req.idUser != userId) {
+        if (!req.idUser) {
             throw generateError(
                 'No tienes permisos para acceder a este espacio',
                 401
             );
         }
 
-        const files = await selectUserDirectoriesQuery(userId);
+        const folders = await selectUserDirectoriesQuery(req.idUser);
+        const files = await selectUserFilesQuery(req.idUser);
 
         res.send({
             status: 'ok',
             data: {
-                files,
+                space: {
+                    folders,
+                    files,
+                },
             },
         });
     } catch (err) {
