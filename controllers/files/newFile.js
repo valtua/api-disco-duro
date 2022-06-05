@@ -18,8 +18,6 @@ const newFile = async (req, res, next) => {
 
         console.log(file);
 
-        await createUploadsIfNotExists();
-
         // Creamos una ruta absoluta al directorio de descargas.
         const uploadsDir = path.join(
             __dirname,
@@ -34,7 +32,7 @@ const newFile = async (req, res, next) => {
 
         file.mv(`${uploadsDir}/${file.name}`);
 
-        await insertUserFilesQuery(req.idUser, file.name)
+        await insertUserFilesQuery(req.idUser, file.name);
 
         res.send({
             status: 'ok',

@@ -18,8 +18,6 @@ const newDirectory = async (req, res, next) => {
             );
         }
 
-        await createUploadsIfNotExists();
-
         // Creamos una ruta absoluta al directorio de descargas.
         const newDir = path.join(
             __dirname,
