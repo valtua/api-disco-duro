@@ -33,6 +33,7 @@ const newFile = async (req, res, next) => {
 
         file.mv(`${uploadsDir}/${file.name}`);
 
+        // Insertamos el archivo
         await insertUserFilesQuery(req.idUser, file.name)
 
         res.send({

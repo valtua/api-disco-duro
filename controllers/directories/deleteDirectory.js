@@ -26,6 +26,7 @@ const deleteDirectory = async (req, res, next) => {
             `${folderName}`
         );
 
+        // Eliminamos la carpeta y sus archivos
         await fs.unlink(deleteDir);
 
         res.send({

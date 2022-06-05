@@ -24,6 +24,7 @@ const downloadFile = async (req, res, next) => {
             `${file.name}`
         );
 
+        // Descargamos el archivo
         res.download(filePath);
     } catch (err) {
         next(err);

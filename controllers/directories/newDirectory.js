@@ -10,7 +10,6 @@ const newDirectory = async (req, res, next) => {
     try {
         // el objeto undefined es el archivo subido.
         const { directory } = req.body;
-
         if (!directory) {
             throw generateError(
                 'No se encuentra un nombre para la carpeta',
@@ -29,10 +28,10 @@ const newDirectory = async (req, res, next) => {
             `${req.idUser}`,
             `${directory}`
         );
-
         // Creamos la carpeta si no existe.
         await createPathIfNotExists(newDir);
 
+        // Insertamos la carpeta
         await insertUserDirectoriesQuery(req.idUser, directory);
 
         res.send({
