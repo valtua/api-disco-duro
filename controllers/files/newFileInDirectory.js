@@ -11,14 +11,12 @@ const newFileInDirectory = async (req, res, next) => {
     try {
         // el objeto undefined es el archivo subido.
         const file = req.files.uploadedFile;
-        const { folderName } = req.params;
-
+        const { folderId } = req.params;
         if (!file) {
             throw generateError('No se encuentra un archivo', 400);
         }
 
-        console.log(file);
-
+        const [folderData] = await selectUserFolderQuery(req.idUser, folderId);
         // Creamos una ruta absoluta al directorio de descargas.
         const uploadsDir = path.join(
             __dirname,
@@ -26,16 +24,14 @@ const newFileInDirectory = async (req, res, next) => {
             '..',
             'uploads',
             `${req.idUser}`,
-            `${folderName}`
+            `${folderData.name}`
         );
 
         // Creamos el directorio si no existe.
         await createPathIfNotExists(uploadsDir);
-
+        
         file.mv(`${uploadsDir}/${file.name}`);
-
-        const folderData = await selectUserFolderQuery(req.idUser, folderName);
-        await insertUserFilesQuery(req.idUser, file.name, folderData[0].id);
+        await insertUserFilesQuery(req.idUser, file.name, folderId);
 
         res.send({
             status: 'ok',

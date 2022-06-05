@@ -7,7 +7,7 @@ const selectOneFileQuery = async (idUser, id) => {
         connection = await getConnection();
 
         const [file] = await connection.query(
-            `SELECT id, name FROM files WHERE idUser = ? AND id = ?`,
+            `SELECT id, name, idDir FROM files WHERE idUser = ? AND id = ?`,
             [idUser, id]
         );
 

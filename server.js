@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const deleteDirectory = require('./controllers/directories/deleteDirectory');
 const newDirectory = require('./controllers/directories/newDirectory');
+const deleteFile = require('./controllers/files/deleteFile');
 const downloadFile = require('./controllers/files/downloadFile');
 const newFile = require('./controllers/files/newFile');
 const newFileInDirectory = require('./controllers/files/newFileInDirectory');
@@ -28,10 +29,11 @@ app.get('/users/space', authUser, getUserSpace);
 
 app.post('/users/upload', authUser, newFile);
 app.post('/users/folder', authUser, newDirectory);
-app.post('/users/upload/:folderName', authUser, newFileInDirectory);
+app.post('/users/upload/:folderId', authUser, newFileInDirectory);
 app.get('/users/download/:fileId', authUser, downloadFile);
 
-app.post('/users/delete/:folderName', authUser, deleteDirectory)
+app.delete('/users/delete/folders/:folderId', authUser, deleteDirectory)
+app.delete('/users/delete/files/:fileId', authUser, deleteFile)
 
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
