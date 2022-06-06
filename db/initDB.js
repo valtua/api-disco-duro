@@ -14,7 +14,7 @@ async function main() {
 
         // Eliminamos las tablas en caso de que ya existan
         await connection.query('DROP TABLE IF EXISTS files');
-        await connection.query('DROP TABLE IF EXISTS directories');
+        await connection.query('DROP TABLE IF EXISTS folders');
         await connection.query('DROP TABLE IF EXISTS users');
 
         console.log('Creando tablas...');
@@ -52,7 +52,7 @@ async function main() {
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 idDir INTEGER,
-                FOREIGN KEY (idDir) REFERENCES directories(id),
+                FOREIGN KEY (idDir) REFERENCES folders(id),
                 name VARCHAR(50) NOT NULL,
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
                 modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP

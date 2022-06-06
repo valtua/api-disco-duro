@@ -1,7 +1,8 @@
 const { generateError } = require('../../helpers');
 const fs = require('fs/promises');
 const path = require('path');
-const { selectOneFileQuery, deleteUserFilesQuery } = require('../../db/filesQueries');
+const selectOneFileQuery = require('../../db/filesQueries/selectOneFileQuery');
+const deleteUserFilesQuery = require('../../db/filesQueries/deleteUserFilesQuery');
 const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
 // Función que eliminará un archivo, de forma local y en la base de datos

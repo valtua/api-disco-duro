@@ -1,5 +1,6 @@
 const { generateError } = require('../../helpers');
-const { selectFilesInFolderQuery , selectUserFilesQuery } = require('../../db/filesQueries/');
+const selectFilesInFolderQuery = require('../../db/filesQueries/selectFilesInFolderQuery');
+const selectUserFilesQuery = require('../../db/filesQueries/selectUserFilesQuery');
 const selectUserFoldersQuery = require('../../db/foldersQueries/selectUserFoldersQuery');
 
 // Función para mostrar el disco duro del usuario (carpetas, archivos)

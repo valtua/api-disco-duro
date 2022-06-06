@@ -1,7 +1,8 @@
 const { generateError } = require('../../helpers');
 const fs = require('fs/promises');
 const path = require('path');
-const { selectUserOneFolderQuery, deleteUserFoldersQuery  } = require('../../db/foldersQueries');
+const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
+const deleteUserFoldersQuery = require('../../db/foldersQueries/deleteUserFoldersQuery');
 
 // Función para eliminar la carpeta y sus archivos
 const deleteFolder = async (req, res, next) => {
