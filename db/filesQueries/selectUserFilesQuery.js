@@ -11,6 +11,10 @@ const selectUserFilesQuery = async (idUser) => {
             [idUser]
         );
 
+        if (files.length < 1) {
+            throw generateError('Archivos no encontrados', 404);
+        }
+
         return files;
     } finally {
         if (connection) connection.release();

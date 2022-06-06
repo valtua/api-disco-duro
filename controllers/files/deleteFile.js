@@ -52,7 +52,7 @@ const deleteFile = async (req, res, next) => {
                 '..',
                 'uploads',
                 `${req.idUser}`,
-                `${file.name}`,
+                `${file.name}`
             );
             
             // Eliminamos el archivo, que no está en una carpeta

@@ -13,7 +13,7 @@ const insertUserQuery = async (name, email, password) => {
             [email]
         );
 
-        if (users.lengt > 0) {
+        if (users.length > 0) {
             throw generateError(
                 'Ya existe un usuario asociado a ese email',
                 409

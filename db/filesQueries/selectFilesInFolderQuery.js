@@ -1,3 +1,4 @@
+const { generateError } = require('../../helpers');
 const getConnection = require('../getConnection');
 
 const selectFilesInFolderQuery = async (idUser, idDir) => {
@@ -10,6 +11,10 @@ const selectFilesInFolderQuery = async (idUser, idDir) => {
             `SELECT id, name FROM files WHERE idUser = ? AND idDir = ?`,
             [idUser, idDir]
         );
+
+        if (file.length < 1) {
+            throw generateError('Archivo no encontrado', 404);
+        }
 
         return file;
     } finally {
