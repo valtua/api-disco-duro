@@ -25,6 +25,7 @@ const downloadFolder = async (req, res, next) => {
             `${folder.name}`
         );
 
+        // Creamos la ruta para la carpeta comprimida
         const zipPath = path.join(
             __dirname,
             '..',
@@ -34,6 +35,7 @@ const downloadFolder = async (req, res, next) => {
             `${folder.name}.zip`
         );
 
+        // Comprimimos la carpeta
         await zip(folderPath, zipPath);
 
         // Descargamos el archivo
@@ -41,6 +43,7 @@ const downloadFolder = async (req, res, next) => {
     } catch (err) {
         next(err);
     } finally {
+        // Eliminamos el archivo zip
         if (req.params) {
             const { folderId } = req.params;
 
@@ -48,7 +51,10 @@ const downloadFolder = async (req, res, next) => {
                 throw generateError('No se encuentra un archivo', 400);
             }
 
-            const [folder] = await selectUserOneFolderQuery(req.idUser, folderId);
+            const [folder] = await selectUserOneFolderQuery(
+                req.idUser,
+                folderId
+            );
             const zipPath = path.join(
                 __dirname,
                 '..',
