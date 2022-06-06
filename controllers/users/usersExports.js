@@ -1,8 +1,8 @@
 
 //Exports de las diferentes funciones para los usuarios
-const getUserSpace = require('./controllers/users/getUserSpace');
-const loginUser = require('./controllers/users/loginUser');
-const newUser = require('./controllers/users/newUser');
+const getUserSpace = require('./getUserSpace');
+const loginUser = require('./loginUser');
+const newUser = require('./newUser');
 
 module.exports = {
     getUserSpace,

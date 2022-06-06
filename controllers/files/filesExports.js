@@ -1,9 +1,9 @@
 
 //Exports de las diferentes funciones para los archivos
-const deleteFile = require('./controllers/files/deleteFile');
-const downloadFile = require('./controllers/files/downloadFile');
-const newFile = require('./controllers/files/newFile');
-const newFileInFolder = require('./controllers/files/newFileInFolder');
+const deleteFile = require('./deleteFile');
+const downloadFile = require('./downloadFile');
+const newFile = require('./newFile');
+const newFileInFolder = require('./newFileInFolder');
 
 module.exports = {
     deleteFile,
