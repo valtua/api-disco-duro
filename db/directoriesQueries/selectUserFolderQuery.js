@@ -1,3 +1,4 @@
+const { generateError } = require('../../helpers');
 const getConnection = require('../getConnection');
 
 const selectUserFolderQuery = async (idUser, id) => {
@@ -8,9 +9,13 @@ const selectUserFolderQuery = async (idUser, id) => {
 
         const [folder] = await connection.query(
             `SELECT id, name FROM directories WHERE idUser = ? AND id = ?`,
-            [idUser , id]
+            [idUser, id]
         );
-        
+
+        if (folder.length < 1) {
+            throw generateError('Carpeta no encontrada', 404);
+        }
+
         return folder;
     } finally {
         if (connection) connection.release();

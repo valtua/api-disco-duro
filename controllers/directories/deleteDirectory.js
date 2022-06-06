@@ -4,13 +4,11 @@ const path = require('path');
 const selectUserFolderQuery = require('../../db/directoriesQueries/selectUserFolderQuery');
 const deleteUserDirectoriesQuery = require('../../db/directoriesQueries/deleteUserDirectoriesQuery');
 
-
 const deleteDirectory = async (req, res, next) => {
     try {
-
-        const { folderId }= req.params;
-        if (!folderId) {
-            throw generateError('No se encuentra la carpeta', 400);
+        const { folderId } = req.params;
+        if (isNaN(folderId)) {
+            throw generateError('No se encuentra un id de carpeta', 400);
         }
         const [folder] = await selectUserFolderQuery(req.idUser, folderId);
         // Localizamos la ruta que queremos eliminar
@@ -24,8 +22,8 @@ const deleteDirectory = async (req, res, next) => {
         );
 
         // Eliminamos la carpeta y sus archivos
-        await fs.rmdir(deleteDir, {recursive: true});
-        await deleteUserDirectoriesQuery(req.idUser, folder.id)
+        await fs.rmdir(deleteDir, { recursive: true });
+        await deleteUserDirectoriesQuery(req.idUser, folder.id);
 
         res.send({
             status: 'ok',

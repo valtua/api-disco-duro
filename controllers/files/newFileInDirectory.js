@@ -12,6 +12,11 @@ const newFileInDirectory = async (req, res, next) => {
         // el objeto undefined es el archivo subido.
         const file = req.files.uploadedFile;
         const { folderId } = req.params;
+
+        if (isNaN(folderId)) {
+            throw generateError('No se encuentra un id de carpeta', 400);
+        }
+
         if (!file) {
             throw generateError('No se encuentra un archivo', 400);
         }
@@ -29,7 +34,7 @@ const newFileInDirectory = async (req, res, next) => {
 
         // Creamos el directorio si no existe.
         await createPathIfNotExists(uploadsDir);
-        
+
         file.mv(`${uploadsDir}/${file.name}`);
         await insertUserFilesQuery(req.idUser, file.name, folderId);
 

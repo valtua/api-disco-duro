@@ -8,8 +8,8 @@ const downloadFile = async (req, res, next) => {
         // el objeto undefined es el archivo subido.
         const { fileId } = req.params;
 
-        if (!fileId) {
-            throw generateError('No se encuentra un archivo', 400);
+        if (isNaN(fileId)) {
+            throw generateError('No se encuentra un id de archivo', 400);
         }
 
         const [file] = await selectOneFileQuery(req.idUser, fileId);
