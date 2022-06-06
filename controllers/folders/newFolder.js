@@ -1,36 +1,39 @@
 const {
     generateError,
     createPathIfNotExists,
-    createUploadsIfNotExists,
 } = require('../../helpers');
 const path = require('path');
-const insertUserDirectoriesQuery = require('../../db/directoriesQueries/insertUserDirectoriesQuery');
+const insertUserFoldersQuery = require('../../db/foldersQueries/insertUserFoldersQuery');
 
-const newDirectory = async (req, res, next) => {
+// Función para crear una nueva carpeta
+const newFolder = async (req, res, next) => {
     try {
-        // el objeto undefined es el archivo subido.
-        const { directory } = req.body;
-        if (!directory) {
+
+        // Recogemos la carpeta en el body
+        const { folder } = req.body;
+
+        // Lanzamos un error en caso de que no encuentre la carpeta
+        if (!folder) {
             throw generateError(
                 'No se encuentra un nombre para la carpeta',
                 400
             );
         }
 
-        // Creamos una ruta absoluta al directorio de descargas.
+        // Variable que contiene la ruta de la carpeta
         const newDir = path.join(
             __dirname,
             '..',
             '..',
             'uploads',
             `${req.idUser}`,
-            `${directory}`
+            `${folder}`
         );
         // Creamos la carpeta si no existe.
         await createPathIfNotExists(newDir);
 
-        // Insertamos la carpeta
-        await insertUserDirectoriesQuery(req.idUser, directory);
+        // Insertamos la carpeta en la base de datos
+        await insertUserFoldersQuery(req.idUser, folder);
 
         res.send({
             status: 'ok',
@@ -41,4 +44,4 @@ const newDirectory = async (req, res, next) => {
     }
 };
 
-module.exports = newDirectory;
+module.exports = newFolder;

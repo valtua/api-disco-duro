@@ -1,19 +1,24 @@
 const { generateError } = require('../../helpers');
 const fs = require('fs/promises');
 const path = require('path');
-const selectUserFolderQuery = require('../../db/directoriesQueries/selectUserFolderQuery');
-const deleteUserDirectoriesQuery = require('../../db/directoriesQueries/deleteUserDirectoriesQuery');
+const { selectUserOneFolderQuery, deleteUserFoldersQuery  } = require('../../db/foldersQueries');
 
-
-const deleteDirectory = async (req, res, next) => {
+// Función para eliminar la carpeta y sus archivos
+const deleteFolder = async (req, res, next) => {
     try {
 
+        // Recogemos el id de la carpeta
         const { folderId }= req.params;
+
+        // Lanzamos un error en caso de que no se encuentre la carpeta
         if (!folderId) {
             throw generateError('No se encuentra la carpeta', 400);
         }
-        const [folder] = await selectUserFolderQuery(req.idUser, folderId);
-        // Localizamos la ruta que queremos eliminar
+
+        // Localizamos en la base de datos la carpeta que queremos eliminar
+        const [folder] = await selectUserOneFolderQuery(req.idUser, folderId);
+        
+        // Variable que contiene la ruta de la carpeta
         const deleteDir = path.join(
             __dirname,
             '..',
@@ -25,7 +30,9 @@ const deleteDirectory = async (req, res, next) => {
 
         // Eliminamos la carpeta y sus archivos
         await fs.rmdir(deleteDir, {recursive: true});
-        await deleteUserDirectoriesQuery(req.idUser, folder.id)
+
+        // Eliminamos la carpeta en la base de datos
+        await deleteUserFoldersQuery(req.idUser, folder.id)
 
         res.send({
             status: 'ok',
@@ -36,4 +43,4 @@ const deleteDirectory = async (req, res, next) => {
     }
 };
 
-module.exports = deleteDirectory;
+module.exports = deleteFolder;

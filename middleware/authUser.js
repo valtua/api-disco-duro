@@ -1,9 +1,10 @@
+const { generateError } = require('../helpers');
 const jwt = require('jsonwebtoken');
 
-const { generateError } = require('../helpers');
-
+// Función para la autentificación del usuario
 const authUser = (req, res, next) => {
     try {
+
         // Obtenemos el token.
         const { authorization } = req.headers;
 
@@ -16,6 +17,7 @@ const authUser = (req, res, next) => {
         let token;
 
         try {
+            
             // Intentamos obtener la info del token.
             token = jwt.verify(authorization, process.env.SECRET);
         } catch {

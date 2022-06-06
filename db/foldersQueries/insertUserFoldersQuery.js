@@ -1,6 +1,6 @@
 const getConnection = require('../getConnection');
 
-const insertUserDirectoriesQuery = async (idUser, name) => {
+const insertUserFoldersQuery = async (idUser, name) => {
     let connection;
 
     try {
@@ -8,7 +8,7 @@ const insertUserDirectoriesQuery = async (idUser, name) => {
 
         await connection.query(
             `
-                INSERT INTO directories (idUser, name)
+                INSERT INTO folders (idUser, name)
                 VALUES (?, ?)
             `,
             [idUser, name]
@@ -18,4 +18,4 @@ const insertUserDirectoriesQuery = async (idUser, name) => {
     }
 };
 
-module.exports = insertUserDirectoriesQuery;
+module.exports = insertUserFoldersQuery;

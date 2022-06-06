@@ -1,13 +1,16 @@
+const { generateError } = require('../../helpers');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const selectUserByEmailQuery = require('../../db/userQueries/selectUserByEmailQuery');
 
-const { generateError } = require('../../helpers');
-
+// Función para loguear a un usuario
 const loginUser = async (req, res, next) => {
     try {
+
+        // Recogemos el email y la pass del usuario
         const { email, password } = req.body;
 
+        // Lanzamos un error en caso de que falte alguno de los datos
         if (!email || !password) {
             throw generateError('Faltan campos', 400);
         }
@@ -18,6 +21,7 @@ const loginUser = async (req, res, next) => {
         // Comprobamos si las contraseñas coinciden.
         const validPassword = await bcrypt.compare(password, user.password);
 
+        // Lanzamos un error en caso de que la contraseña no coincide
         if (!validPassword) {
             await generateError('Contraseña incorrecta', 401);
         }

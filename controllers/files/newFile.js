@@ -1,23 +1,21 @@
 const {
     generateError,
     createPathIfNotExists,
-    createUploadsIfNotExists,
 } = require('../../helpers');
 const path = require('path');
 const insertUserFilesQuery = require('../../db/filesQueries/insertUserFilesQuery');
 
+// Función que insertará el archivo de forma local (sin carpeta) y en la base de datos
 const newFile = async (req, res, next) => {
     try {
-        // el objeto undefined es el archivo subido.
         const file = req.files.uploadedFile;
 
+        // Lanzamos un error en caso de que no se encuentre el archivo
         if (!file) {
             throw generateError('No se encuentra un archivo', 400);
         }
 
-        console.log(file);
-
-        // Creamos una ruta absoluta al directorio de descargas.
+        // Variable que contiene la ruta dónde se creará el archivo (raíz/usuario)
         const uploadsDir = path.join(
             __dirname,
             '..',
@@ -29,9 +27,10 @@ const newFile = async (req, res, next) => {
         // Creamos el directorio si no existe.
         await createPathIfNotExists(uploadsDir);
 
+        // Movemos el archivo a la ruta
         file.mv(`${uploadsDir}/${file.name}`);
 
-        // Insertamos el archivo
+        // Insertamos el archivo en la base de datos
         await insertUserFilesQuery(req.idUser, file.name)
 
         res.send({

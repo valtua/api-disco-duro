@@ -1,21 +1,25 @@
 const getConnection = require('./getConnection');
 
 async function main() {
+
     // Variable que almacenará una conexión libre de la base de datos.
     let connection;
 
     try {
+
         // Obtenemos una conexión libre.
         connection = await getConnection();
 
         console.log('Borrando tablas existentes...');
 
+        // Eliminamos las tablas en caso de que ya existan
         await connection.query('DROP TABLE IF EXISTS files');
         await connection.query('DROP TABLE IF EXISTS directories');
         await connection.query('DROP TABLE IF EXISTS users');
 
         console.log('Creando tablas...');
 
+        // Creamos la tabla usuarios
         await connection.query(`
             CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -28,8 +32,9 @@ async function main() {
             )
         `);
 
+        // Creamos la tabla carpetas
         await connection.query(`
-            CREATE TABLE directories (
+            CREATE TABLE folders (
                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
@@ -40,6 +45,7 @@ async function main() {
             )
         `);
 
+        // Creamos la tabla archivos
         await connection.query(`
             CREATE TABLE files (
                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -57,6 +63,7 @@ async function main() {
     } catch (err) {
         console.error(err);
     } finally {
+        
         // Si existe una conexión la liberamos.
         if (connection) connection.release();
 

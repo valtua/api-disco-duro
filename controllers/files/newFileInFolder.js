@@ -1,23 +1,30 @@
 const {
     generateError,
     createPathIfNotExists,
-    createUploadsIfNotExists,
 } = require('../../helpers');
 const path = require('path');
 const insertUserFilesQuery = require('../../db/filesQueries/insertUserFilesQuery');
-const selectUserFolderQuery = require('../../db/directoriesQueries/selectUserFolderQuery');
+const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
-const newFileInDirectory = async (req, res, next) => {
+// Función que insertará el archivo de forma local (dentro de una carpeta) y en la base de datos
+const newFileInFolder = async (req, res, next) => {
     try {
-        // el objeto undefined es el archivo subido.
+        
+        // Recogemos el archivo
         const file = req.files.uploadedFile;
+
+        // Recogemos el id del archivo
         const { folderId } = req.params;
+
+        // Lanzamos un error en caso de que no se encuentre el archivo
         if (!file) {
             throw generateError('No se encuentra un archivo', 400);
         }
 
-        const [folderData] = await selectUserFolderQuery(req.idUser, folderId);
-        // Creamos una ruta absoluta al directorio de descargas.
+        // Localizamos en la base de datos la carpeta donde queremos crear el archivo
+        const [folderData] = await selectUserOneFolderQuery(req.idUser, folderId);
+
+        // Variable que contiene la ruta dónde se creará el archivo (raíz/usuario/carpeta)
         const uploadsDir = path.join(
             __dirname,
             '..',
@@ -30,7 +37,10 @@ const newFileInDirectory = async (req, res, next) => {
         // Creamos el directorio si no existe.
         await createPathIfNotExists(uploadsDir);
         
+        // Movemos el archivo a la ruta
         file.mv(`${uploadsDir}/${file.name}`);
+
+        // Insertamos el archivo en la base de datos
         await insertUserFilesQuery(req.idUser, file.name, folderId);
 
         res.send({
@@ -42,4 +52,4 @@ const newFileInDirectory = async (req, res, next) => {
     }
 };
 
-module.exports = newFileInDirectory;
+module.exports = newFileInFolder;

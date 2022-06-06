@@ -1,5 +1,6 @@
 const getConnection = require('../getConnection');
 
+// Función con query para insertar un archivo
 const insertUserFilesQuery = async (idUser, name, idDir) => {
     let connection;
 

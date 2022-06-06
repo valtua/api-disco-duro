@@ -1,15 +1,15 @@
-const insertUserQuery = require('../../db/userQueries/insertUserQuery');
-
-const path = require('path');
-
 const {
     generateError,
     createUploadsIfNotExists,
     createPathIfNotExists,
 } = require('../../helpers');
+const path = require('path');
+const insertUserQuery = require('../../db/userQueries/insertUserQuery');
+
 
 const newUser = async (req, res, next) => {
     try {
+
         // Obtenemos los campos del body.
         const { name, email, password } = req.body;
 
@@ -23,7 +23,7 @@ const newUser = async (req, res, next) => {
 
         await createUploadsIfNotExists();
 
-        // Creamos una ruta absoluta al directorio de descargas.
+        // Variable que contiene la ruta dela carpeta del usuario
         const newUserSpace = path.join(
             __dirname,
             '..',

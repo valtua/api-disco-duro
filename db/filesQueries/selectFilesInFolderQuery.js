@@ -1,6 +1,6 @@
 const getConnection = require('../getConnection');
 
-const selectFilesInDirectoryQuery = async (idUser, idDir) => {
+const selectFilesInFolderQuery = async (idUser, idDir) => {
     let connection;
 
     try {
@@ -17,4 +17,4 @@ const selectFilesInDirectoryQuery = async (idUser, idDir) => {
     }
 };
 
-module.exports = selectFilesInDirectoryQuery;
+module.exports = selectFilesInFolderQuery;

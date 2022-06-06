@@ -7,6 +7,7 @@ const generateError = (message, status) => {
     return error;
 };
 
+// Función que crea una ruta en caso de no existir
 const createPathIfNotExists = async (path) => {
     try {
         // Intentamos acceder al directorio.
@@ -18,6 +19,7 @@ const createPathIfNotExists = async (path) => {
     }
 };
 
+// Función que crea la carpeta Uploads si no existe
 const createUploadsIfNotExists = async () => {
     // Creamos una ruta absoluta al directorio de descargas.
     const uploadsDir = path.join(__dirname, 'uploads');

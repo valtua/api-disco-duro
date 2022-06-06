@@ -1,13 +1,13 @@
 const getConnection = require('../getConnection');
 
-const selectUserFolderQuery = async (idUser, id) => {
+const selectUserOneFolderQuery = async (idUser, id) => {
     let connection;
 
     try {
         connection = await getConnection();
 
         const [folder] = await connection.query(
-            `SELECT id, name FROM directories WHERE idUser = ? AND id = ?`,
+            `SELECT id, name FROM folders WHERE idUser = ? AND id = ?`,
             [idUser , id]
         );
         
@@ -17,4 +17,4 @@ const selectUserFolderQuery = async (idUser, id) => {
     }
 };
 
-module.exports = selectUserFolderQuery;
+module.exports = selectUserOneFolderQuery;
