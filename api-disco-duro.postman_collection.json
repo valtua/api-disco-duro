@@ -1,100 +1,332 @@
 {
-    "info": {
-        "_postman_id": "5da845d1-dbce-4191-b3a5-e5e0875af39e",
-        "name": "api-disco-duro",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "new user",
-            "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\r\n    \"name\": \"test\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123456\"\r\n}",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
-                    }
-                },
-                "url": {
-                    "raw": "{{server}}/users/register",
-                    "host": ["{{server}}"],
-                    "path": ["users", "register"]
-                }
-            },
-            "response": []
-        },
-        {
-            "name": "login user",
-            "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123456\"\r\n}",
-                    "options": {
-                        "raw": {
-                            "language": "json"
-                        }
-                    }
-                },
-                "url": {
-                    "raw": "{{server}}/users/login",
-                    "host": ["{{server}}"],
-                    "path": ["users", "login"]
-                }
-            },
-            "response": []
-        },
-        {
-            "name": "get user space",
-            "request": {
-                "method": "GET",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "{{user}}",
-                        "type": "default"
-                    }
-                ],
-                "url": {
-                    "raw": "{{server}}/users/1/space",
-                    "host": ["{{server}}"],
-                    "path": ["users", "1", "space"]
-                }
-            },
-            "response": []
-        }
-    ],
-    "event": [
-        {
-            "listen": "prerequest",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
-        },
-        {
-            "listen": "test",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
-        }
-    ],
-    "variable": [
-        {
-            "key": "server",
-            "value": "",
-            "type": "default"
-        },
-        {
-            "key": "user",
-            "value": "",
-            "type": "default"
-        }
-    ]
+	"info": {
+		"_postman_id": "8ab1a723-f626-4baf-adae-00b6d22c2779",
+		"name": "api-disco-duro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "new user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"testUser\",\n    \"email\": \"test@test.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/users/register/",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/users/login",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user space",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{server}}/users/space",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"space"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new folder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"folder\": \"testFolder\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}/users/folder",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"folder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download Folder",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{server}}/users/download/folder/1",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"download",
+						"folder",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete folder",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{server}}/users/delete/folders/1",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"delete",
+						"folders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uploadedFile",
+							"type": "file",
+							"src": "/home/adrian/Downloads/sakila-db/sakila-schema.sql"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/users/upload",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadInFolder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uploadedFile",
+							"type": "file",
+							"src": "/home/adrian/Downloads/sakila-db/sakila-data.sql"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/users/upload/1",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"upload",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download File",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{server}}/users/download/file/3",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"download",
+						"file",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete File",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{user}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{server}}/users/delete/files/1",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"users",
+						"delete",
+						"files",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "user",
+			"value": "",
+			"type": "default"
+		}
+	]
 }
