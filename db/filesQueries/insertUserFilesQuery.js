@@ -5,8 +5,10 @@ const insertUserFilesQuery = async (idUser, name, idDir) => {
     let connection;
 
     try {
+        // Conectamos a la base de datos
         connection = await getConnection();
 
+        // Realizamos la query
         await connection.query(
             `
                 INSERT INTO files (idUser, name, idDir)
@@ -15,6 +17,7 @@ const insertUserFilesQuery = async (idUser, name, idDir) => {
             [idUser, name, idDir]
         );
     } finally {
+        // Liberamos la conexión
         if (connection) connection.release();
     }
 };
