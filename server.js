@@ -15,7 +15,7 @@ const { PORT } = process.env;
 // Requerimos los controladores para los archivos, carpetas y usuarios
 const { deleteFile, downloadFile, newFile, newFileInFolder } = require('./controllers/files/filesExports');
 const { deleteFolder, downloadFolder, newFolder } = require('./controllers/folders/foldersExports');
-const { getUserSpace, loginUser, newUser } = require('./controllers/users/usersExports');
+const { newUser, loginUser, modifyUser, getUserSpace } = require('./controllers/users/usersExports');
 
 // Declaramos una variable que contiene la tecnología express, para el manejo de endpoints
 const app = express();
@@ -29,16 +29,17 @@ app.use(cors());
 // Métodos post, get y delete con sus respectivos endpoints
 app.post('/users/register', newUser);
 app.post('/users/login', loginUser);
+app.post('/users/modifyUser/:userId', modifyUser);
 app.get('/users/space', authUser, getUserSpace);
 
 app.post('/users/upload', authUser, newFile);
-app.post('/users/folder', authUser, newFolder);
 app.post('/users/upload/:folderId', authUser, newFileInFolder);
 app.get('/users/download/file/:fileId', authUser, downloadFile);
-app.get('/users/download/folder/:folderId', authUser, downloadFolder);
-
-app.delete('/users/delete/folders/:folderId', authUser, deleteFolder);
 app.delete('/users/delete/files/:fileId', authUser, deleteFile);
+
+app.post('/users/folder', authUser, newFolder);
+app.get('/users/download/folder/:folderId', authUser, downloadFolder);
+app.delete('/users/delete/folders/:folderId', authUser, deleteFolder);
 
 // Iniciamos el servidor
 app.listen(PORT, () => {

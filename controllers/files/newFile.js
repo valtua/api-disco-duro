@@ -1,11 +1,8 @@
-const {
-    generateError,
-    createPathIfNotExists,
-} = require('../../helpers');
+const { generateError, createPathIfNotExists } = require('../../helpers');
 const path = require('path');
 const insertUserFilesQuery = require('../../db/filesQueries/insertUserFilesQuery');
 
-// Función que insertará el archivo de forma local (sin carpeta) y en la base de datos
+// Función para insertar el archivo de forma local (sin carpeta) y en la base de datos
 const newFile = async (req, res, next) => {
     try {
         const file = req.files.uploadedFile;

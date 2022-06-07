@@ -4,6 +4,7 @@ const fs = require('fs/promises');
 const { zip } = require('zip-a-folder');
 const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
+// Función para descargar la carpeta seleccionada y sus archivos
 const downloadFolder = async (req, res, next) => {
     try {
         // el objeto undefined es el archivo subido.
@@ -43,6 +44,7 @@ const downloadFolder = async (req, res, next) => {
     } catch (err) {
         next(err);
     } finally {
+        
         // Eliminamos el archivo zip
         if (req.params) {
             const { folderId } = req.params;

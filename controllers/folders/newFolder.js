@@ -1,7 +1,4 @@
-const {
-    generateError,
-    createPathIfNotExists,
-} = require('../../helpers');
+const { generateError, createPathIfNotExists } = require('../../helpers');
 const path = require('path');
 const insertUserFoldersQuery = require('../../db/foldersQueries/insertUserFoldersQuery');
 

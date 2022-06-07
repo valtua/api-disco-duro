@@ -1,12 +1,9 @@
-const {
-    generateError,
-    createPathIfNotExists,
-} = require('../../helpers');
+const { generateError, createPathIfNotExists } = require('../../helpers');
 const path = require('path');
 const insertUserFilesQuery = require('../../db/filesQueries/insertUserFilesQuery');
 const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
-// Función que insertará el archivo de forma local (dentro de una carpeta) y en la base de datos
+// Función para insertar el archivo de forma local (dentro de una carpeta) y en la base de datos
 const newFileInFolder = async (req, res, next) => {
     try {
         

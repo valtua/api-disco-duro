@@ -1,9 +1,9 @@
-const getConnection = require('../getConnection');
 const { generateError } = require('../../helpers');
+const getConnection = require('../getConnection');
 const bcrypt = require('bcrypt');
 
 // Función con query para insertar un usuario en la DB
-const insertUserQuery = async (name, email, password) => {
+const insertUserQuery = async (name, email, password, biography, photo) => {
     let connection;
 
     try {
@@ -29,11 +29,7 @@ const insertUserQuery = async (name, email, password) => {
 
         // Realizamos la query
         const [newUser] = await connection.query(
-            `
-        
-            INSERT INTO users (name, email, password)
-            VALUES(?, ?, ?)`,
-            [name, email, hashedPassword]
+            `INSERT INTO users (name, email, password, biography, photo) VALUES(?, ?, ?, ?, ?)`, [name, email, hashedPassword, biography, photo]
         );
 
         // Retornamos el id del nuevo usuario

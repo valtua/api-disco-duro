@@ -5,7 +5,7 @@ const selectOneFileQuery = require('../../db/filesQueries/selectOneFileQuery');
 const deleteUserFilesQuery = require('../../db/filesQueries/deleteUserFilesQuery');
 const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
-// Función que eliminará un archivo, de forma local y en la base de datos
+// Función para eliminar un archivo, de forma local y en la base de datos
 const deleteFile = async (req, res, next) => {
     try {
 

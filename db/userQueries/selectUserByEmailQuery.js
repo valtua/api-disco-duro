@@ -11,7 +11,7 @@ const selectUserByEmailQuery = async (email) => {
 
         // Realizamos la query
         const [users] = await connection.query(
-            `SELECT id, email, password FROM users WHERE email = ?`,
+            `SELECT * FROM users WHERE email = ?`,
             [email]
         );
 

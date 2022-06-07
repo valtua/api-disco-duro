@@ -4,7 +4,6 @@ const path = require('path');
 const selectOneFileQuery = require('../../db/filesQueries/selectOneFileQuery');
 const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneFolderQuery');
 
-
 // Función para descargar un archivo
 const downloadFile = async (req, res, next) => {
     try {

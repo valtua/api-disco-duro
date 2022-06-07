@@ -1,3 +1,4 @@
+const { generateError } = require('../../helpers');
 const getConnection = require('../getConnection');
 
 // Función con query para seleccionar todos los archivos de un usuario

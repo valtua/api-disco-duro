@@ -1,5 +1,5 @@
-const getConnection = require('../getConnection');
 const { generateError } = require('../../helpers');
+const getConnection = require('../getConnection');
 
 // Función con query para seleccionar un usuario por su id
 const selectUserByIdQuery = async (idUser) => {
@@ -11,7 +11,7 @@ const selectUserByIdQuery = async (idUser) => {
 
         // Realizamos la query
         const [users] = await connection.query(
-            `SELECT id, email, createdAt FROM users WHERE id = ?`,
+            `SELECT * FROM users WHERE id = ?`,
             [idUser]
         );
 

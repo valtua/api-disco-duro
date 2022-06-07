@@ -1,7 +1,7 @@
 const { generateError } = require('../../helpers');
 const getConnection = require('../getConnection');
 
-// Función con query para seleccionar archivos
+// Función con query para seleccionar un archivo
 const selectOneFileQuery = async (idUser, id) => {
     let connection;
 

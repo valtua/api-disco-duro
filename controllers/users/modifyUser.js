@@ -1,25 +1,24 @@
-const { generateError, createUploadsIfNotExists, createPathIfNotExists } = require('../../helpers');
+const { generateError, createPathIfNotExists } = require('../../helpers');
 const path = require('path');
 const sharp = require('sharp');
 const { nanoid } = require('nanoid');
-const insertUserQuery = require('../../db/userQueries/insertUserQuery');
+const modifyUserQuery = require('../../db/userQueries/modifyUserQuery');
+const selectUserByIdQuery = require('../../db/userQueries/selectUserByIdQuery');
 
-// Función para crear un nuevo usuario
-const newUser = async (req, res, next) => {
+// Función para modificar el usuario en la base de datos
+const modifyUser = async (req, res, next) => {
     try {
 
-        // Obtenemos los campos del body.
+        // Recogemos la id del usuario que vamos a modificar, y las modificaciones
+        const { userId } = req.params;
         const { name, email, password, biography } = req.body;
 
-        // Si faltan campos lanzamos un error.
-        if (!name || !email || !password) {
-            throw generateError('Faltan campos', 400);
+        // Lanzamos un error en caso de que no se encuentre el usuario
+        if (!userId) {
+            throw generateError('No se encuentra el usuario', 400);
         }
 
-        // Creamos la carpeta upload si no existe
-        await createUploadsIfNotExists();
-
-        // Variable donde almacenaremos el nombre con el que guardaremos la imagen en el disco.
+        // Variable donde almacenaremos el nombre con el que guardaremos la nueva imagen en el disco.
         let photoName;
 
         // Si la imagen existe la guardamos.
@@ -47,28 +46,16 @@ const newUser = async (req, res, next) => {
             await sharpPhoto.toFile(photoPath);
         }
 
-        // Creamos un usuario en la base de datos y obtenemos el id.
-        const idUser = await insertUserQuery(name, email, password, biography, photoName);
-
-        // Variable que contiene la ruta de la carpeta del usuario
-        const newUserSpace = path.join(
-            __dirname,
-            '..',
-            '..',
-            'uploads',
-            `${idUser}`
-        );
-
-        // Creamos la carpeta si no existe.
-        await createPathIfNotExists(newUserSpace);
+        // Modificamos al usuario en la base de datos
+        await modifyUserQuery(name, email, biography, photoName, userId)
 
         res.send({
             status: 'ok',
-            message: `Usuario con id ${idUser} creado`,
+            message: 'Usuario modificado correctamente',
         });
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        next(err);
     }
 };
 
-module.exports = newUser;
+module.exports = modifyUser;
