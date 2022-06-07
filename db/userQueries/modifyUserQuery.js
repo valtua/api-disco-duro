@@ -10,7 +10,7 @@ const modifyUserQuery = async (name, email, biography, photo, id) => {
         // Conectamos a la base de datos
         connection = await getConnection();
 
-        // Realizamos la query
+        // Realizamos la query, modificar usuario
         const user = await connection.query(
             `UPDATE users SET name = ?, email = ?, biography = ?, photo = ? WHERE id = ?; `,
             [name, email, biography, photo, id]
