@@ -6,7 +6,7 @@ const selectUserOneFolderQuery = require('../../db/foldersQueries/selectUserOneF
 
 const downloadFolder = async (req, res, next) => {
     try {
-        // el objeto undefined es el archivo subido.
+        // El objeto undefined es el archivo subido.
         const { folderId } = req.params;
 
         if (isNaN(folderId)) {
