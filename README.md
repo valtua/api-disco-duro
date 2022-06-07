@@ -26,7 +26,7 @@ Disk Drive API uses a number of open source technologies to work properly:
 
 ## Libraries
 
-To make the API function the following packages are implemented from NPM
+To make the API function the following packages are implemented from NPM:
 
 -   [express-fileupload](https://www.npmjs.com/package/express-fileupload)
 -   [mysql2](https://www.npmjs.com/package/mysql2)
@@ -38,7 +38,7 @@ To make the API function the following packages are implemented from NPM
 
 ## Development
 
-Disk Drive API uses a number of technologies to make the development easier
+Disk Drive API uses a number of technologies to make the development easier:
 
 -   [ESLint](https://eslint.org/)
 -   [Morgan](https://github.com/expressjs/morgan)
@@ -56,13 +56,13 @@ cd api-disco-duro
 npm i
 ```
 
-Create a database on MySQL
+Create a database on MySQL.
 
 ```sql
 CREATE DATABASE <database_name>;
 ```
 
-Change the file name "_.env.example_" to "_.env_" and introduce the variable values
+Change the file name "_.env.example_" to "_.env_" and introduce the variable values.
 
 -   PORT - A port number for the server to listen
 -   MYSQL_HOST - A valid host from MySQL
@@ -71,7 +71,7 @@ Change the file name "_.env.example_" to "_.env_" and introduce the variable val
 -   MYSQL_DB - A valid database name
 -   SECRET - A random alphanumeric string of characters
 
-Initialize the database
+Initialize the database.
 
 ```sh
 cd db
@@ -92,7 +92,7 @@ Finally start the server
 node server
 ```
 
-Or start the server in development mode
+Or start the server in development mode.
 
 ```sh
 npm run dev
