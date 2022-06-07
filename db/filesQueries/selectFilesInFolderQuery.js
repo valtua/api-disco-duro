@@ -15,11 +15,6 @@ const selectFilesInFolderQuery = async (idUser, idDir) => {
             [idUser, idDir]
         );
 
-        // Lanzamos un error cuando la longitud de 'file' es menor a 1
-        if (file.length < 1) {
-            throw generateError('Archivo no encontrado', 404);
-        }
-
         // Retornamos el archivo
         return file;
     } finally {
