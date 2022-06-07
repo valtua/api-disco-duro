@@ -35,6 +35,8 @@ To make the API function the following packages are implemented from NPM:
 -   [bcrypt](https://www.npmjs.com/package/bcrypt)
 -   [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 -   [zip-a-folder](https://www.npmjs.com/package/zip-a-folder)
+-   [sharp](https://www.npmjs.com/package/sharp)
+-   [nanoid](https://www.npmjs.com/package/nanoid)
 
 ## Development
 
