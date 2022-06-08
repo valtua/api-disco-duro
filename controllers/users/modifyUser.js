@@ -3,18 +3,16 @@ const path = require('path');
 const sharp = require('sharp');
 const { nanoid } = require('nanoid');
 const modifyUserQuery = require('../../db/userQueries/modifyUserQuery');
-const selectUserByIdQuery = require('../../db/userQueries/selectUserByIdQuery');
 
 // Función para modificar el usuario en la base de datos
 const modifyUser = async (req, res, next) => {
     try {
-
         // Recogemos la id del usuario que vamos a modificar, y las modificaciones
-        const { userId } = req.params;
-        const { name, email, password, biography } = req.body;
+
+        const { name, email, biography } = req.body;
 
         // Lanzamos un error en caso de que no se encuentre el usuario
-        if (!userId) {
+        if (!req.idUser) {
             throw generateError('No se encuentra el usuario', 400);
         }
 
@@ -23,9 +21,14 @@ const modifyUser = async (req, res, next) => {
 
         // Si la imagen existe la guardamos.
         if (req.files && req.files.photo) {
-
             // Creamos una ruta absoluta al directorio de descargas.
-            const uploadsDir = path.join(__dirname, '..', '..', 'uploads', 'photos');
+            const uploadsDir = path.join(
+                __dirname,
+                '..',
+                '..',
+                'uploads',
+                'photos'
+            );
 
             // Creamos el directorio si no existe.
             await createPathIfNotExists(uploadsDir);
@@ -47,7 +50,7 @@ const modifyUser = async (req, res, next) => {
         }
 
         // Modificamos al usuario en la base de datos
-        await modifyUserQuery(name, email, biography, photoName, userId)
+        await modifyUserQuery(name, email, biography, photoName, req.idUser);
 
         res.send({
             status: 'ok',

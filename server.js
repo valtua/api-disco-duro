@@ -18,9 +18,23 @@ const { PORT } = process.env;
 // ---------------------- CONTROLLERS ----------------------
 
 // Requerimos los controladores para los archivos, carpetas y usuarios
-const { deleteFile, downloadFile, newFile, newFileInFolder } = require('./controllers/files/filesExports');
-const { deleteFolder, downloadFolder, newFolder } = require('./controllers/folders/foldersExports');
-const { newUser, loginUser, modifyUser, getUserSpace } = require('./controllers/users/usersExports');
+const {
+    deleteFile,
+    downloadFile,
+    newFile,
+    newFileInFolder,
+} = require('./controllers/files/filesExports');
+const {
+    deleteFolder,
+    downloadFolder,
+    newFolder,
+} = require('./controllers/folders/foldersExports');
+const {
+    newUser,
+    loginUser,
+    modifyUser,
+    getUserSpace,
+} = require('./controllers/users/usersExports');
 
 // Declaramos una variable que contiene la tecnología express, para el manejo de endpoints
 const app = express();
@@ -34,40 +48,57 @@ app.use(cors());
 // ---------------------- ENDPOINTS ----------------------
 
 // Registrar un nuevo usuario
-app.post('/users/register', newUser);
+app.post('/register', newUser);
 
 // Login
-app.post('/users/login', loginUser);
+app.post('/login', loginUser);
 
 // Modificar un usuario
-app.post('/users/modifyUser/:userId', modifyUser);
+app.post('/user', authUser, modifyUser);
 
 // Ver archivos y carpetas
-app.get('/users/space', authUser, getUserSpace);
+app.get('/disk', authUser, getUserSpace);
 
 // Subir un nuevo archivo
-app.post('/users/upload', authUser, newFile);
+app.post('/upload', authUser, newFile);
 
 // Subir un archivo dentro de una carpeta
-app.post('/users/upload/:folderId', authUser, newFileInFolder);
+app.post('/upload/:folderId', authUser, newFileInFolder);
 
 // Descargar un archivo
-app.get('/users/download/file/:fileId', authUser, downloadFile);
+app.get('/download/file/:fileId', authUser, downloadFile);
 
 // Borrar un archivo
-app.delete('/users/delete/files/:fileId', authUser, deleteFile);
+app.delete('/delete/file/:fileId', authUser, deleteFile);
 
 // Crear una nueva carpeta
-app.post('/users/folder', authUser, newFolder);
+app.post('/folder', authUser, newFolder);
 
 // Descargar una carpeta
-app.get('/users/download/folder/:folderId', authUser, downloadFolder);
+app.get('/download/folder/:folderId', authUser, downloadFolder);
 
 // Borrar una carpeta
-app.delete('/users/delete/folders/:folderId', authUser, deleteFolder);
-
+app.delete('/delete/folder/:folderId', authUser, deleteFolder);
 
 // --------------------------------------------------------
+
+// MIDDLEWARE ERROR
+
+app.use((err, req, res, next) => {
+    console.error(err);
+
+    res.status(err.statusCode || 500).send({
+        status: 'error',
+        message: err.message,
+    });
+});
+
+app.use((req, res) => {
+    res.status(404).send({
+        status: 'error',
+        message: 'Not found',
+    });
+});
 
 // Iniciamos el servidor
 app.listen(PORT, () => {

@@ -1,12 +1,10 @@
 const getConnection = require('./getConnection');
 
 async function main() {
-
     // Variable que almacenará una conexión libre de la base de datos.
     let connection;
 
     try {
-
         // Obtenemos una conexión libre.
         connection = await getConnection();
 
@@ -41,8 +39,7 @@ async function main() {
                 idUser INTEGER NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 name VARCHAR(50) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
 
             )
         `);
@@ -56,8 +53,7 @@ async function main() {
                 idDir INTEGER,
                 FOREIGN KEY (idDir) REFERENCES folders(id),
                 name VARCHAR(50) NOT NULL,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-                modifiedAt DATETIME ON UPDATE CURRENT_TIMESTAMP
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
 
@@ -65,7 +61,6 @@ async function main() {
     } catch (err) {
         console.error(err);
     } finally {
-        
         // Si existe una conexión la liberamos.
         if (connection) connection.release();
 

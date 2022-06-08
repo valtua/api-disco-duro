@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8ab1a723-f626-4baf-adae-00b6d22c2779",
+		"_postman_id": "f5ba3f83-dd1c-410d-bdbf-b602981742ef",
 		"name": "api-disco-duro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -52,14 +52,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{server}}/users/register/",
+					"raw": "{{server}}/register",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
-						"register",
-						""
+						"register"
 					]
 				}
 			},
@@ -80,12 +78,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{server}}/users/login",
+					"raw": "{{server}}/login",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"login"
 					]
 				}
@@ -108,18 +105,19 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "pepe",
+							"value": "Aurelio",
 							"type": "default"
 						},
 						{
 							"key": "email",
-							"value": "pepe@pepe.com",
+							"value": "test@test.com",
 							"type": "default"
 						},
 						{
 							"key": "password",
 							"value": "654321",
-							"type": "default"
+							"type": "default",
+							"disabled": true
 						},
 						{
 							"key": "biography",
@@ -129,19 +127,17 @@
 						{
 							"key": "photo",
 							"type": "file",
-							"src": "/home/adrian/Downloads/pepe.jpg"
+							"src": "/C:/Users/david/Pictures/Sin título.png"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{server}}/users/modifyUser/1",
+					"raw": "{{server}}/user",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
-						"modifyUser",
-						"1"
+						"user"
 					]
 				}
 			},
@@ -168,12 +164,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{server}}/users/folder",
+					"raw": "{{server}}/folder",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"folder"
 					]
 				}
@@ -192,12 +187,11 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/users/download/folder/1",
+					"raw": "{{server}}/download/folder/1",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"download",
 						"folder",
 						"1"
@@ -218,14 +212,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/users/delete/folders/1",
+					"raw": "{{server}}/delete/folder/1",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"delete",
-						"folders",
+						"folder",
 						"1"
 					]
 				}
@@ -249,17 +242,16 @@
 						{
 							"key": "uploadedFile",
 							"type": "file",
-							"src": "/home/adrian/Downloads/sakila-db/sakila-schema.sql"
+							"src": "///wsl.localhost/Ubuntu/home/david/Downloads/google-chrome-stable_current_amd64.deb"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{server}}/users/upload",
+					"raw": "{{server}}/upload",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"upload"
 					]
 				}
@@ -283,19 +275,18 @@
 						{
 							"key": "uploadedFile",
 							"type": "file",
-							"src": "/home/adrian/Downloads/sakila-db/sakila-data.sql"
+							"src": "///wsl.localhost/Ubuntu/home/david/Downloads/code_1.67.2-1652812855_amd64.deb"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{server}}/users/upload/1",
+					"raw": "{{server}}/upload/2",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"upload",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -313,12 +304,11 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/users/download/file/3",
+					"raw": "{{server}}/download/file/3",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"download",
 						"file",
 						"3"
@@ -339,14 +329,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/users/delete/files/1",
+					"raw": "{{server}}/delete/file/1",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
 						"delete",
-						"files",
+						"file",
 						"1"
 					]
 				}
@@ -365,13 +354,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}/users/space",
+					"raw": "{{server}}/disk",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"users",
-						"space"
+						"disk"
 					]
 				}
 			},

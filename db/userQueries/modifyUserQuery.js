@@ -6,7 +6,6 @@ const modifyUserQuery = async (name, email, biography, photo, id) => {
     let connection;
 
     try {
-        
         // Conectamos a la base de datos
         connection = await getConnection();
 
@@ -15,13 +14,10 @@ const modifyUserQuery = async (name, email, biography, photo, id) => {
             `UPDATE users SET name = ?, email = ?, biography = ?, photo = ? WHERE id = ?; `,
             [name, email, biography, photo, id]
         );
-        console.log(user);
 
         // Retornamos el usuario
         return user;
-
     } finally {
-
         // Liberamos la conexión
         if (connection) connection.release();
     }
