@@ -6,7 +6,6 @@ const selectUserByEmailQuery = require('../../db/userQueries/selectUserByEmailQu
 // Función para loguear a un usuario
 const loginUser = async (req, res, next) => {
     try {
-
         // Recogemos el email y la pass del usuario
         const { email, password } = req.body;
 
@@ -23,7 +22,7 @@ const loginUser = async (req, res, next) => {
 
         // Lanzamos un error en caso de que la contraseña no coincide
         if (!validPassword) {
-            await generateError('Contraseña incorrecta', 401);
+            throw generateError('Contraseña incorrecta', 401);
         }
 
         // Información que queremos guardar en el token.
